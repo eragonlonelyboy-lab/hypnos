@@ -18,7 +18,7 @@ A memory tool asks for more trust than any other tool: it edits the files that s
 
 ## Mechanical limits
 
-- **The benchmark caught 3 real bugs pre-launch** (an importance score that let a line vouch for itself, a CLI flag value leaking into restore queries, and a regex that broke on Windows drive letters `C:`). They're fixed and regression-tested: but treat this as the honest base rate for v0.1 code: run `hypnos run` (free, read-only) and read the plan before your first `apply`.
+- **The benchmark caught 3 real bugs pre-launch** (an importance score that let a line vouch for itself, a CLI flag value leaking into restore queries, and a regex that broke on Windows drive letters `C:`). They're fixed and regression-tested, but treat this as the honest base rate for v0.1 code: run `hypnos run` (free, read-only) and read the plan before your first `apply`.
 - **Line-drift guard:** if a file changed between `run` and `apply`, affected actions are SKIPPED and logged, not force-applied. Re-run to re-plan.
 - **`restore` appends to the end** of the source file, not the original position. The changelog records both.
 - **The health score is a hygiene metric, not a quality metric.** 100/100 means no dupes/contradictions/budget-violations/stale-dates: it says nothing about whether your rules are any good.
@@ -26,4 +26,4 @@ A memory tool asks for more trust than any other tool: it edits the files that s
 
 ## The trust contract, in one paragraph
 
-`run` writes nothing (a pending plan lands in `.hypnos/`, your memory files are untouched: verified by test on every commit). `apply` touches only what the reviewed plan shows, archives every removal to a dated file with a source pointer, and appends every action to `MEMORY_CHANGELOG.md`. Generated state (Codex memories, Cascade, Claude auto-memory) is refused at the code level, not by convention. If you keep your memory in git: and you should: every HYPNOS pass is one reviewable commit. That's the entire pitch: the audit trail the big vendors removed, rebuilt as a file format you already trust.
+`run` writes nothing (a pending plan lands in `.hypnos/`, your memory files are untouched, verified by test on every commit). `apply` touches only what the reviewed plan shows, archives every removal to a dated file with a source pointer, and appends every action to `MEMORY_CHANGELOG.md`. Generated state (Codex memories, Cascade, Claude auto-memory) is refused at the code level, not by convention. If you keep your memory in git, and you should, every HYPNOS pass is one reviewable commit. That's the entire pitch: the audit trail the big vendors removed, rebuilt as a file format you already trust.

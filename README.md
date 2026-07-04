@@ -2,7 +2,7 @@
 
 **Agents' memory rots. HYPNOS consolidates it in their sleep: every change a diff, nothing ever deleted.**
 
-Hypnos is the Greek god of sleep. Sleep is when memory consolidates: and when trust matters most, because you aren't watching. So HYPNOS earns it structurally: **dry-run is the default and the law**, every removal is archived and restorable, every applied change lands in a changelog, and the whole thing is designed to be reviewed as a git diff.
+Hypnos is the Greek god of sleep. Sleep is when memory consolidates, and when trust matters most, because you aren't watching. So HYPNOS earns it structurally: **dry-run is the default and the law**, every removal is archived and restorable, every applied change lands in a changelog, and the whole thing is designed to be reviewed as a git diff.
 
 ## The drifted trio
 
@@ -69,7 +69,7 @@ macOS / Linux:
 ```bash
 git clone https://github.com/eragonlonelyboy-lab/hypnos && cd hypnos && npm link
 ```
-Node 18+, zero dependencies. No hooks, no daemon, no account. Broke something? Impossible before `apply`: and after `apply`, the archive and the changelog have everything.
+Node 18+, zero dependencies. No hooks, no daemon, no account. Broke something? Impossible before `apply`. After `apply`, the archive and the changelog have everything.
 
 ## Commands
 
