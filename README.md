@@ -1,4 +1,4 @@
-# HYPNOS
+# HYPNOS: Harmonizes Your Persistent-memory, Never Overwrites Silently
 
 **Agents' memory rots. HYPNOS consolidates it in their sleep: every change a diff, nothing ever deleted.**
 
