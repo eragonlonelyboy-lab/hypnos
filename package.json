@@ -1,0 +1,15 @@
+{
+  "name": "demiurge-hypnos",
+  "version": "0.1.0",
+  "description": "Agents' memory rots. HYPNOS consolidates it in their sleep: every change a diff, nothing ever deleted. Cross-agent: Claude Code, Codex, Cursor, Windsurf.",
+  "bin": { "hypnos": "bin/hypnos.js" },
+  "main": "lib/analyze.js",
+  "scripts": {
+    "test": "node benchmarks/run.js"
+  },
+  "engines": { "node": ">=18" },
+  "keywords": ["claude-code", "codex", "cursor", "windsurf", "agents-md", "memory", "consolidation", "claude-md", "rules", "demiurge"],
+  "author": "Eragon (Demiurge)",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/eragonlonelyboy-lab/hypnos" }
+}
