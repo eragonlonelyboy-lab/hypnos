@@ -69,7 +69,7 @@ macOS / Linux:
 ```bash
 git clone https://github.com/eragonlonelyboy-lab/hypnos && cd hypnos && npm link
 ```
-Node 18+, zero dependencies. No hooks, no daemon, no account. Broke something? Impossible before `apply`. After `apply`, the archive and the changelog have everything.
+Node 18+, zero dependencies. No hooks, no daemon, no account. New here? `hypnos setup` walks you through the trust contract and your first ritual, step by step, changing nothing. Broke something? Impossible before `apply`. After `apply`, the archive and the changelog have everything.
 
 ## Commands
 

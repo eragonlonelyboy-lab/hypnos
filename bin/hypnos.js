@@ -86,6 +86,36 @@ const commands = {
 
   health() {
     console.log(renderHealth(health(makeMap())));
+  },
+
+  // Guided setup: state-aware, explains every step in plain language, safe to re-run.
+  setup() {
+    const ok = m => console.log('  [done] ' + m);
+    const info = m => console.log('         ' + m);
+    console.log('HYPNOS guided setup (re-run this any time; it only reads, never changes)\n');
+    console.log('Step 1 of 3: nothing to install into your agent');
+    ok('HYPNOS is a CLI, not a hook. It runs only when you run it, and `run` never touches a file.');
+    info('The trust contract: run = a pending plan you review. apply = only what the plan showed,');
+    info('with every removal archived and restorable. Your memory files, your approval, always.');
+
+    console.log('\nStep 2 of 3: what HYPNOS sees right here');
+    const map = makeMap();
+    if (map.files.length) {
+      ok(`${map.files.length} memory file(s) detected in this folder (${[...new Set(map.files.map(f => f.tool))].join(', ')}).`);
+      info('It reads CLAUDE.md, AGENTS.md, .cursor/rules, Windsurf/Devin rules. It NEVER touches');
+      info('generated state (Codex memories, Cascade, Claude auto-memory): refused in code, not by promise.');
+    } else {
+      info('No memory files in this folder. Run setup from a project root, or point it: hypnos setup --root <dir>');
+      info('Keep a curated memory tree elsewhere? Add --memory-dir <dir>.');
+    }
+
+    console.log('\nStep 3 of 3: the ritual (three commands, in this order)');
+    info('1. hypnos health   : a 0-100 hygiene score. Just a number, changes nothing.');
+    info('2. hypnos run      : the full pass. Prints a PENDING PLAN: dupes to archive, contradictions');
+    info('                     for YOU to settle, budget violations that silently break tools. Changes nothing.');
+    info('3. hypnos apply    : only after you read the plan. Archives, never deletes. hypnos restore undoes.');
+    console.log('\nPrefer a guided conversation? Open your agent in this repo and say: "set up HYPNOS for me".');
+    console.log('\nSetup state: READY the moment the command exists. Start with: hypnos health');
   }
 };
 
@@ -103,7 +133,8 @@ function siblingCheck() {
 }
 
 (commands[cmd] || (() => {
-  console.log('hypnos <scan|run|apply|restore|health> [--root <dir>] [--memory-dir <dir>] [--home]');
+  console.log('hypnos <setup|scan|run|apply|restore|health> [--root <dir>] [--memory-dir <dir>] [--home]');
+  console.log('  setup     guided, state-aware walkthrough: explains every step, safe to re-run');
   console.log('  scan      map every memory file + the never-touch list');
   console.log('  run       4-phase consolidation -> PENDING PLAN ONLY (dry-run is the default and the law)');
   console.log('            [--create-agentsmd] scaffold AGENTS.md as the canonical cross-tool file');
