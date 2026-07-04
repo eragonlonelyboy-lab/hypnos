@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 // HYPNOS seeded-drift benchmark: builds the "drifted trio" fixture and asserts every detector.
-// Deterministic — same fixture, same findings, every run.
+// Deterministic: same fixture, same findings, every run.
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -34,7 +34,7 @@ fs.writeFileSync(path.join(ROOT, 'AGENTS.md'), [
 ].join('\n'));
 
 // Age CLAUDE.md 200 days: the importance gate only proposes deprecated lines in OLD files.
-// AGENTS.md stays fresh — its deprecated line must NOT be proposed (conservatism is the feature).
+// AGENTS.md stays fresh: its deprecated line must NOT be proposed (conservatism is the feature).
 const old = new Date(Date.now() - 200 * 86400000);
 fs.utimesSync(path.join(ROOT, 'CLAUDE.md'), old, old);
 
@@ -99,11 +99,37 @@ const h1 = cli('health');
 const h2 = cli('health');
 check('health deterministic', h1 === h2 && /\d+\/100/.test(h1), h1.split('\n')[0]);
 
+// STRESS: CRLF files (Windows-authored memory) — dupes still detected across line endings.
+{
+  const R2 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-crlf-'));
+  fs.writeFileSync(path.join(R2, 'CLAUDE.md'), '# Rules\r\nThe deploy pipeline requires manual approval for production releases.\r\n');
+  fs.writeFileSync(path.join(R2, 'AGENTS.md'), '# AGENTS.md\nThe deploy pipeline requires manual approval for production releases.\n');
+  const o = execFileSync('node', [path.join(REPO, 'bin', 'hypnos.js'), 'run', '--root', R2], { encoding: 'utf8' });
+  check('CRLF/LF cross-file dupe detected', o.includes('duplicate of'), o.slice(0, 150));
+}
+
+// STRESS: empty root — no memory files at all, no crash, honest empty plan.
+{
+  const R3 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-empty-'));
+  const o = execFileSync('node', [path.join(REPO, 'bin', 'hypnos.js'), 'run', '--root', R3], { encoding: 'utf8' });
+  check('empty root survives with honest empty plan', o.includes('scanned 0 memory files') && o.includes('No changes proposed'));
+}
+
+// STRESS: frontmatter-only .mdc file — nothing to analyze, nothing corrupted, no crash.
+{
+  const R4 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-fm-'));
+  fs.mkdirSync(path.join(R4, '.cursor', 'rules'), { recursive: true });
+  const fmOnly = '---\ndescription: empty rule\nalwaysApply: false\n---\n';
+  fs.writeFileSync(path.join(R4, '.cursor', 'rules', 'empty.mdc'), fmOnly);
+  execFileSync('node', [path.join(REPO, 'bin', 'hypnos.js'), 'run', '--root', R4], { encoding: 'utf8' });
+  check('frontmatter-only .mdc untouched and uncrashed', fs.readFileSync(path.join(R4, '.cursor', 'rules', 'empty.mdc'), 'utf8') === fmOnly);
+}
+
 // Report
 console.log('\nHYPNOS seeded-drift benchmark');
 console.log('| check | pass |');
 console.log('|---|---|');
-for (const r of results) console.log(`| ${r.name} | ${r.pass ? 'YES' : 'NO — ' + r.detail} |`);
+for (const r of results) console.log(`| ${r.name} | ${r.pass ? 'YES' : 'NO: ' + r.detail} |`);
 const passed = results.filter(r => r.pass).length;
 console.log(`\n${passed}/${results.length} checks pass.`);
 process.exit(passed === results.length ? 0 : 1);

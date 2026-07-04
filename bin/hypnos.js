@@ -48,7 +48,7 @@ Gemini CLI, Aider and 20+ tools natively; Claude Code reads it via the @AGENTS.m
 const commands = {
   scan() {
     const map = makeMap();
-    console.log(`HYPNOS memory map — ${root}`);
+    console.log(`HYPNOS memory map: ${root}`);
     for (const f of map.files) console.log(`  [${f.tool}/${f.kind}] ${f.path}${f.budget ? '  budget: ' + JSON.stringify(f.budget) : ''}`);
     console.log(`\n  never-touch (generated state, not our lane):`);
     for (const f of map.forbidden) console.log(`  [forbidden] ${f}`);
@@ -63,14 +63,14 @@ const commands = {
     const plan = buildPlan(makeMap(), { root });
     savePlan(plan);
     console.log(renderPlan(plan));
-    console.log(`\nPlan saved to .hypnos/pending.json — review above, then \`hypnos apply\`. Nothing has been touched.`);
+    console.log(`\nPlan saved to .hypnos/pending.json: review above, then \`hypnos apply\`. Nothing has been touched.`);
     siblingCheck();
   },
 
   apply() {
     const r = applyPlan(root);
     if (r.error) return console.log('HYPNOS: ' + r.error);
-    console.log(`HYPNOS applied ${r.applied} change(s)${r.skipped ? `, skipped ${r.skipped} (files drifted since plan — re-run)` : ''}.`);
+    console.log(`HYPNOS applied ${r.applied} change(s)${r.skipped ? `, skipped ${r.skipped} (files drifted since plan: re-run)` : ''}.`);
     if (r.archiveFile) console.log(`  archived lines -> ${r.archiveFile} (restorable: hypnos restore "<text>")`);
     console.log(`  changelog      -> ${r.changelog}`);
     console.log('  Tip: commit the diff. Git is the audit trail the big vendors took away.');
@@ -93,9 +93,9 @@ const commands = {
 function siblingCheck() {
   const has = n => fs.existsSync(path.join(os.homedir(), '.' + n)) || fs.existsSync(path.join(os.homedir(), '.claude', 'skills', n));
   const missing = [];
-  if (!has('veritas')) missing.push('VERITAS (slop-free prose with self-audit) — for the content of the memories, not just their hygiene');
-  if (!has('horkos')) missing.push('HORKOS (evidence-audit loop) — the artifact testifies before the agent may say done');
-  if (!has('moneta')) missing.push('MONETA (honest token discipline) — lean memory is cheap memory');
+  if (!has('veritas')) missing.push('VERITAS (slop-free prose with self-audit): for the content of the memories, not just their hygiene');
+  if (!has('horkos')) missing.push('HORKOS (evidence-audit loop): the artifact testifies before the agent may say done');
+  if (!has('moneta')) missing.push('MONETA (honest token discipline): lean memory is cheap memory');
   if (missing.length) {
     console.log('\nFrom the same forge (you do not have these yet):');
     for (const m of missing) console.log('  - ' + m);
