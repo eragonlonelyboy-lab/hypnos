@@ -32,6 +32,15 @@ Three tools, three contradicting rulebooks, one silently-broken file. One `hypno
 
 Nothing was touched. You read the plan, you run `hypnos apply`, you commit the diff. **The diff is the product.**
 
+## Two modes: capture and hygiene
+
+HYPNOS supersedes the end-of-session "dream" ritual, and it does both halves of the memory job:
+
+- **Capture** (the skill, agent-run): at session end, the agent reads what was learned: decisions, corrections, completions: and writes it into your memory files. This half needs a model by nature. What makes it HYPNOS instead of a silent editor: every addition is logged to `MEMORY_CHANGELOG.md`, every edit or removal archives the original first (restorable via `hypnos restore`), and ambiguous contradictions are asked, never auto-picked. Then it closes by running the CLI as a deterministic audit of its own pass.
+- **Hygiene** (the CLI, deterministic): dedupe, drift, contradictions, budget caps, health score. Zero LLM calls, zero network: pure local text ops. Everything below this section describes it.
+
+The order is the point: the model writes, the deterministic engine verifies, and both leave receipts in the same `.hypnos/` ledger.
+
 ## Why this lane is empty
 
 - Anthropic's Auto Dream consolidates **auto-memory only**: it explicitly leaves your curated CLAUDE.md and rules files alone. Nobody owns curated-memory hygiene.
@@ -45,7 +54,7 @@ Nothing was touched. You read the plan, you run `hypnos apply`, you commit the d
 | "Deleting doesn't actually delete / can't undo" | archive-not-delete + `hypnos restore` |
 | "Silent revisions I never noticed" | contradictions surfaced, **never** auto-resolved |
 | "No manual trigger" | it's a CLI; you are the trigger |
-| "Consolidation eats my rate limits" | zero LLM calls, zero network: pure local text ops |
+| "Consolidation eats my rate limits" | hygiene is zero LLM, zero network: pure local text ops; capture runs inside a session you already have open |
 
 ## What it respects (cross-agent, quirk-accurate)
 
@@ -84,7 +93,7 @@ hypnos health               # deterministic 0-100 memory health score
 
 ## Benchmarks
 
-Reproducible, in-repo, deterministic: `npm test`: 19/19 on the seeded-drift corpus (contradiction surfacing, budget caps, archive/restore round-trip, frontmatter preservation, fresh-vs-old prune gating, determinism). Building this benchmark caught three real bugs before launch, including a Windows drive-colon parser break: details in [docs/HONEST-NUMBERS.md](docs/HONEST-NUMBERS.md), which also lists exactly when you should NOT use HYPNOS.
+Reproducible, in-repo, deterministic: `npm test`: 22/22 on the seeded-drift corpus (contradiction surfacing, budget caps, archive/restore round-trip, frontmatter preservation, fresh-vs-old prune gating, determinism). Building this benchmark caught three real bugs before launch, including a Windows drive-colon parser break: details in [docs/HONEST-NUMBERS.md](docs/HONEST-NUMBERS.md), which also lists exactly when you should NOT use HYPNOS.
 
 ## From the same forge
 

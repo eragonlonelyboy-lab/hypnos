@@ -12,9 +12,15 @@ A memory tool asks for more trust than any other tool: it edits the files that s
 ## When HYPNOS is worthless
 
 - **Tiny memory.** One CLAUDE.md under 50 lines → `run` finds nothing → health says 100. Correct and useless.
-- **You want automatic memory capture.** HYPNOS consolidates what exists; it doesn't extract memories from sessions. That's the engine lane (claude-mem, mem0, Letta, Zep): databases, embeddings, retrieval. Different product, different trust model.
+- **You want a memory database.** Capture mode writes session learnings into your plain-markdown files, but HYPNOS is not the engine lane (claude-mem, mem0, Letta, Zep): no embeddings, no retrieval index, no background extraction daemon. If you want automatic capture without an agent in the loop, that's their product, with their trust model.
 - **You want auto-memory managed.** Claude's auto-memory is Auto Dream's lane and is on our never-touch list. HYPNOS competing there would be noise.
 - **Cline Memory Bank users.** The convention is community-maintained and we haven't verified the current spec: Cline support is deliberately NOT shipped rather than shipped guessed.
+
+## Capture mode is LLM work, and no benchmark can bless it
+
+- The CLI's 22/22 benchmark covers hygiene only. Capture mode (the skill: session → memory synthesis) is model judgment, and we do not pretend a deterministic test can certify judgment. What IS enforced structurally: every capture change lands in `MEMORY_CHANGELOG.md`, every destructive edit archives the original first (restorable), ambiguous contradictions are asked rather than picked. The receipts are checkable even when the synthesis is not.
+- The honest test for capture: after a real session, read the changelog lines it wrote. If any change lacks a receipt, or a removed line is missing from the archive, capture mode broke its contract: report it as a bug.
+- Capture closes with `hypnos health` / `hypnos run` on its own output: the deterministic engine auditing the model. A capture pass that skips the verify step is incomplete by definition.
 
 ## Mechanical limits
 

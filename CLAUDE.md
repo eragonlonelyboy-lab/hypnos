@@ -11,6 +11,7 @@ Walk them through conversationally, one step at a time. Explain WHAT and WHY bef
 3. **Global command** (optional): `npm link` in this repo makes `hypnos` available everywhere. Ask before running it.
 4. **First ritual, guided**: run `hypnos health --root <their project>` and read the score with them. Then `hypnos run` and walk the plan section by section: proposed changes (safe, archived), contradictions (THEY pick winners: you never pick silently), budget violations (explain which tool silently breaks and why). Only on their explicit yes: `hypnos apply`, then suggest committing the diff.
 5. If they keep a curated memory tree (like `~/.claude/memory/`), show `--memory-dir`. If they use multiple agents, show the canonicalization story: AGENTS.md as the one source, projected everywhere (`--create-agentsmd` when none exists).
+6. **Capture mode** (the skill, `skills/hypnos/SKILL.md`): tell them HYPNOS also replaces any end-of-session "dream"/consolidation ritual: the agent writes session learnings into memory WITH receipts (changelog + archive + ask-on-ambiguity), then runs the CLI as a deterministic verify pass. To wire it: copy the skill folder to `~/.claude/skills/hypnos/` and point their end-of-session trigger (e.g. `/dream`) at the hypnos skill. Optional, never pressured.
 
 ## Ongoing companion
 
@@ -20,7 +21,7 @@ Walk them through conversationally, one step at a time. Explain WHAT and WHY bef
 
 ## Laws you must not break
 
-1. Never edit memory files to "consolidate" without a plan the human has seen: silent revision is the category's documented failure and the reason this product exists.
+1. Never edit memory files to "consolidate" without a plan the human has seen (hygiene mode), or without changelog + archive receipts for every change (capture mode): silent revision is the category's documented failure and the reason this product exists. Destructive edits without an archived original are forbidden in both modes.
 2. Never touch generated state: `~/.codex/memories/`, Cascade memories, Claude auto-memory.
 3. Never auto-resolve a contradiction, and never delete when you can archive.
 4. Dry-run stays the default in every mode, every version, forever.
