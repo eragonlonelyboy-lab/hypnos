@@ -32,7 +32,7 @@ The four dream phases, now with the trust contract dream never had.
 
 ### Locations
 
-Work over, in order of relevance: (1) the project's memory tree if the working directory has one (`memory/` or the user's configured KB), (2) the user's curated global memory (for this machine: `C:/Users/erago/.claude/memory/`, index `MEMORY.md`), (3) the harness auto-memory directory when the session names one. Session transcripts: grep narrowly, never read whole files. **Never touch generated state:** `~/.codex/memories/`, Cascade memories, Claude auto-memory internals: same never-touch list as the CLI.
+Work over, in order of relevance: (1) the project's memory tree if the working directory has one (`memory/` or the user's configured KB), (2) the user's curated global memory if configured (for example `~/.claude/memory/`, index `MEMORY.md`), (3) the harness auto-memory directory when the session names one. Session transcripts: grep narrowly, never read whole files. **Never touch generated state:** `~/.codex/memories/`, Cascade memories, Claude auto-memory internals: same never-touch list as the CLI.
 
 ### Phase 1: Orient
 `ls` each memory root; read the index; skim existing topic files so you improve them instead of duplicating. Note stale, contradicted, or verbose files.
