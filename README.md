@@ -6,6 +6,8 @@
 
 *Your AI agent memory drifted while you slept. Hypnos tidies it, and deletes nothing.*
 
+**The memory layer for AI agents. Nothing deleted, ever.**
+
 ![license](https://img.shields.io/badge/license-MIT-E8A23D)
 ![node](https://img.shields.io/badge/node-%E2%89%A518-2C7A7B)
 ![benchmarks](https://img.shields.io/badge/benchmarks-22%2F22-E8A23D)
