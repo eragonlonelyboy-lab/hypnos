@@ -120,7 +120,7 @@ check('health deterministic', h1 === h2 && /\d+\/100/.test(h1), h1.split('\n')[0
   check('nested git repo excluded from scan', o.includes('1 files') && !o.includes('someone-elses-repo'), o.split('\n')[0]);
 }
 
-// STRESS: CRLF files (Windows-authored memory) — dupes still detected across line endings.
+// STRESS: CRLF files (Windows-authored memory), dupes still detected across line endings.
 {
   const R2 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-crlf-'));
   fs.writeFileSync(path.join(R2, 'CLAUDE.md'), '# Rules\r\nThe deploy pipeline requires manual approval for production releases.\r\n');
@@ -129,14 +129,14 @@ check('health deterministic', h1 === h2 && /\d+\/100/.test(h1), h1.split('\n')[0
   check('CRLF/LF cross-file dupe detected', o.includes('duplicate of'), o.slice(0, 150));
 }
 
-// STRESS: empty root — no memory files at all, no crash, honest empty plan.
+// STRESS: empty root, no memory files at all, no crash, honest empty plan.
 {
   const R3 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-empty-'));
   const o = execFileSync('node', [path.join(REPO, 'bin', 'hypnos.js'), 'run', '--root', R3], { encoding: 'utf8' });
   check('empty root survives with honest empty plan', o.includes('scanned 0 memory files') && o.includes('No changes proposed'));
 }
 
-// STRESS: frontmatter-only .mdc file — nothing to analyze, nothing corrupted, no crash.
+// STRESS: frontmatter-only .mdc file, nothing to analyze, nothing corrupted, no crash.
 {
   const R4 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-fm-'));
   fs.mkdirSync(path.join(R4, '.cursor', 'rules'), { recursive: true });
