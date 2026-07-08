@@ -85,7 +85,8 @@ const commands = {
   },
 
   health() {
-    console.log(renderHealth(health(makeMap())));
+    const root = val('--memory-dir') ? path.resolve(val('--memory-dir')) : (val('--root') ? path.resolve(val('--root')) : process.cwd());
+    console.log(renderHealth(health(makeMap()), root));
   },
 
   // Guided setup: state-aware, explains every step in plain language, safe to re-run.

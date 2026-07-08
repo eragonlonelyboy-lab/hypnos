@@ -10,7 +10,7 @@
 
 ![license](https://img.shields.io/badge/license-MIT-E8A23D)
 ![node](https://img.shields.io/badge/node-%E2%89%A518-2C7A7B)
-![benchmarks](https://img.shields.io/badge/benchmarks-22%2F22-E8A23D)
+![benchmarks](https://img.shields.io/badge/benchmarks-24%2F24-E8A23D)
 ![zero deps](https://img.shields.io/badge/dependencies-0-2C7A7B)
 ![cross agent](https://img.shields.io/badge/cross--agent-yes-E8A23D)
 
@@ -119,7 +119,7 @@ Claude auto-memory and Cascade memories are also refused in code. Generated stat
 
 Reproducible, in-repo, deterministic: `npm test`.
 
-The suite is **22/22** on the seeded-drift corpus: contradiction surfacing, budget caps, archive/restore round-trip, frontmatter preservation, fresh-vs-old prune gating, and determinism. Building this benchmark caught three real bugs before launch, including a Windows drive-colon parser break. Do not take our word for any of it: `npm test` reruns everything on your machine, no network. And when HYPNOS should not be used at all, it says so out loud: [docs/HONEST-NUMBERS.md](docs/HONEST-NUMBERS.md) lists exactly when to reach for something else.
+The suite is **24/24** on the seeded-drift corpus: contradiction surfacing, budget caps, archive/restore round-trip, frontmatter preservation, fresh-vs-old prune gating, and determinism. Building this benchmark caught three real bugs before launch, including a Windows drive-colon parser break. Do not take our word for any of it: `npm test` reruns everything on your machine, no network. And when HYPNOS should not be used at all, it says so out loud: [docs/HONEST-NUMBERS.md](docs/HONEST-NUMBERS.md) lists exactly when to reach for something else.
 
 ## Commands
 

@@ -18,7 +18,7 @@ A memory tool asks for more trust than any other tool: it edits the files that s
 
 ## Capture mode is LLM work, and no benchmark can bless it
 
-- The CLI's 22/22 benchmark covers hygiene only. Capture mode (the skill: session → memory synthesis) is model judgment, and we do not pretend a deterministic test can certify judgment. What IS enforced structurally: every capture change lands in `MEMORY_CHANGELOG.md`, every destructive edit archives the original first (restorable), ambiguous contradictions are asked rather than picked. The receipts are checkable even when the synthesis is not.
+- The CLI's 24/24 benchmark covers hygiene only. Capture mode (the skill: session → memory synthesis) is model judgment, and we do not pretend a deterministic test can certify judgment. What IS enforced structurally: every capture change lands in `MEMORY_CHANGELOG.md`, every destructive edit archives the original first (restorable), ambiguous contradictions are asked rather than picked. The receipts are checkable even when the synthesis is not.
 - The honest test for capture: after a real session, read the changelog lines it wrote. If any change lacks a receipt, or a removed line is missing from the archive, capture mode broke its contract: report it as a bug.
 - Capture closes with `hypnos health` / `hypnos run` on its own output: the deterministic engine auditing the model. A capture pass that skips the verify step is incomplete by definition.
 

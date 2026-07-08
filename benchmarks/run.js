@@ -99,6 +99,27 @@ const h1 = cli('health');
 const h2 = cli('health');
 check('health deterministic', h1 === h2 && /\d+\/100/.test(h1), h1.split('\n')[0]);
 
+// REGRESSION (dogfood 2026-07-08): a root with no agent-memory files must NOT render 100/100.
+// It rendered a confident grade on nothing, and the number got quoted back as proof.
+{
+  const R0 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-empty-'));
+  const o = execFileSync('node', [path.join(REPO, 'bin', 'hypnos.js'), 'health', '--root', R0], { encoding: 'utf8' });
+  check('zero memory files -> NOT SCORED, never 100/100', o.includes('NOT SCORED') && !/\d+\/100/.test(o), o.split('\n')[0]);
+}
+
+// REGRESSION (same dogfood): a nested git repo under the tree is a DIFFERENT project. Its
+// AGENTS.md must not be scanned. The live bug graded a vendored third-party AGENTS.md
+// 100/100 and called it the user's own memory health.
+{
+  const R3 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-nested-'));
+  fs.writeFileSync(path.join(R3, 'CLAUDE.md'), '# Rules\nOnly this file is mine.\n');
+  const vendored = path.join(R3, '.repos', 'someone-elses-repo');
+  fs.mkdirSync(path.join(vendored, '.git'), { recursive: true });
+  fs.writeFileSync(path.join(vendored, 'AGENTS.md'), '# Their agent rules\nNot my memory.\n');
+  const o = execFileSync('node', [path.join(REPO, 'bin', 'hypnos.js'), 'health', '--root', R3], { encoding: 'utf8' });
+  check('nested git repo excluded from scan', o.includes('1 files') && !o.includes('someone-elses-repo'), o.split('\n')[0]);
+}
+
 // STRESS: CRLF files (Windows-authored memory) — dupes still detected across line endings.
 {
   const R2 = fs.mkdtempSync(path.join(os.tmpdir(), 'hypnos-crlf-'));
