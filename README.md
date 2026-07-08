@@ -162,6 +162,9 @@ HYPNOS is a [Demiurge](https://github.com/eragonlonelyboy-lab/demiurge) product.
 | **ATHENA** | Decision trials with verdicts on the record |
 | **CALLIOPE** | A full design agency in the terminal, gated by a QA lead who does not accept "looks fine" |
 | **MAAT** | Multi-agent attention terminal: receipts across every session |
+| **ZOILUS** | The merciless critic: a blind panel judges the craft and rejects on doubt |
+| **PEITHO** | Go-to-market: positioning, angles and offers that refuse to sound generic |
+| **PYRRHO** | The skeptic: suspends judgment until the data earns it |
 
 ## The fair trade
 
