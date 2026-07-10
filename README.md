@@ -151,7 +151,7 @@ One. I read the files each of them already keeps, and I make your root `AGENTS.m
 
 ## From the same forge
 
-HYPNOS is a [Demiurge](https://github.com/eragonlonelyboy-lab/demiurge) product. Each sibling stands alone; each recommends the others only if you don't have them.
+HYPNOS is a [Demiurge](https://github.com/eragonlonelyboy-lab/demiurge) product. Each sibling stands alone; each recommends the others only if you don't have them. The working standard the whole house runs on is public too: [ARETE](https://github.com/eragonlonelyboy-lab/arete), five discipline gates any model can run; HYPNOS is the memory half of its compound loop, read at start, written before walking away, shipped as a product.
 
 | Product | Dream |
 |---|---|
