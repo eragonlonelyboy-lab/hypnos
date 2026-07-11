@@ -59,6 +59,15 @@ Return a short summary: consolidated / updated / archived / surfaced-for-decisio
 
 ## Hygiene mode (the CLI does the work)
 
+### Multi-model project continuity
+
+When several agent products or model families share one project, preserve one canonical project truth. `AGENTS.md` carries cross-agent instructions; project status, tickets, decisions and review logs stay in their project files. Host-specific memory files contain only routing or local overrides.
+
+- Capture stable work ids, owner/model/session when known, proof, deviations and the next action.
+- Keep ticket handoff and review logs append-only; compact old detail by pointer, never into a competing summary file.
+- Do not merge rejected review findings away. Preserve them with their rejection reason and decision tripwire.
+- Never edit vendor-generated session memory. HYPNOS consolidates curated project truth only.
+
 1. `hypnos scan --root <project>`: show the memory map first (`--memory-dir <dir>` for curated trees, `--home` for the global CLAUDE.md).
 2. `hypnos run`: generates the PENDING PLAN. Dry-run is the law: nothing is modified.
 3. Present the plan verbatim, grouped: proposed changes / contradictions / budget violations / staleness. Do not editorialize the contradictions.
