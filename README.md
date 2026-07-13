@@ -86,6 +86,8 @@ Claude auto-memory is also never touched: Auto Dream owns it; competing there wo
 
 ## Install for your agent
 
+> **From npm:** `npm install -g demiurge-hypnos`, then `hypnos setup` — or `npx demiurge-hypnos setup` with no install. Source build below.
+
 Install the CLI once. It runs everywhere you run a shell.
 
 Windows (PowerShell):

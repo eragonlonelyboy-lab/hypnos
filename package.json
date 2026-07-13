@@ -11,5 +11,6 @@
   "keywords": ["claude-code", "codex", "cursor", "windsurf", "agents-md", "memory", "consolidation", "claude-md", "rules", "demiurge"],
   "author": "Eragon Lee (Demiurge)",
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/eragonlonelyboy-lab/hypnos" }
+  "repository": { "type": "git", "url": "https://github.com/eragonlonelyboy-lab/hypnos" },
+  "files": ["bin", "lib", "docs", "skills", "CLAUDE.md"]
 }
