@@ -1,6 +1,6 @@
 {
   "name": "demiurge-hypnos",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Agents' memory rots. HYPNOS consolidates it in their sleep: every change a diff, nothing ever deleted. Cross-agent: Claude Code, Codex, Cursor, Windsurf.",
   "bin": { "hypnos": "bin/hypnos.js" },
   "main": "lib/analyze.js",
